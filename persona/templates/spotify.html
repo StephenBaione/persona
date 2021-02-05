@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="../static/css/spotify.css">
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="container">
+            <h4><b>{{ session["username"] }}'s Spotify</b></h4>
+            <p>{{ spotify.display_name }}</p>
+        </div>
+    </div>
+{% endblock %}

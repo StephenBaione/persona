@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="../static/css/home.css">
+{% endblock %}
+{% block content %}
+    <h1>Welcome back: {{ user.username }}</h1>
+    <div id="connected-applications-container">
+        <ul>Connected Applications:
+            {% if user.spotify_connected %}
+                <ul>Spotify:
+                    <li>Username: {{ spotify.display_name }}</li>
+                    <li>Subscription Type: {{ spotify.product }}</li>
+                    <li>Followers: {{ spotify.followers }}</li>
+                </ul>
+            {% endif %}
+            {% if user.twitter_connected %}
+                <li>Twitter</li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}

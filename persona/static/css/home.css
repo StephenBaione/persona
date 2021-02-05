@@ -1,0 +1,16 @@
+.top-ribbon {
+    position: absolute;
+    top: 10px;
+    display: inline-block;
+}
+
+.content h1 {
+    text-align: center;
+}
+
+.content a {
+    right: 10px;
+}
+
+
+

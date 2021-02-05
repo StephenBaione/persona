@@ -1,0 +1,152 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navigation-item {
+    display: inline-block;
+}
+
+.navbar {
+    background: black;
+    opacity: 0.8;
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+}
+
+.toggleMenu-btn.click span:before {
+    content: '\f00d';
+}
+
+.navbar a {
+    display: inline-block;
+    color: white;
+    float: right;
+    text-align: center;
+    text-decoration: none;
+    font-size: 25px;
+    padding: 10px 30px 10px 30px;
+    border-right: black solid 2px;
+}
+
+#toggle-div {
+    float: left;
+    transition: margin-left ease-in-out 0.3s;
+}
+
+#logo-div {
+    position: fixed;
+    left: 50%;
+}
+
+.navbar a:first-of-type {
+    border-right: 0;
+}
+
+.navbar a:hover {
+    background: white;
+    color: black;
+    cursor: pointer;
+    transition: background-color ease-in-out 0.3s;
+}
+
+.navbar.click div {
+    margin-left: 250px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    left: -250px;
+    background: black;
+    text-align: center;
+    transition: left ease-in-out 0.3s;
+}
+
+.sidebar.show {
+    left: 0;
+}
+
+.sidebar h1 {
+    text-align: left;
+    font-size: 35px;
+    margin-left: 40px;
+    margin-top: 10px;
+    color: purple;
+}
+
+.sidebar-list {
+    list-style: none;
+    margin-left: 0;
+    margin-top: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar-list li {
+    font-size: 25px;
+    text-align: left;
+    text-decoration: none;
+    display: block;
+    padding-top: 10px;
+    border-bottom: black solid 2px;
+    color: white;
+    line-height: 60px;
+}
+
+.sidebar-list li:hover {
+    background: whitesmoke;
+    color: black;
+    transition: background-color ease-in-out 0.1s;
+    cursor: pointer;
+}
+
+
+.sidebar-list li a {
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 40px;
+    width: 100%;
+    text-decoration: none;
+    text-underline: none;
+}
+
+.dropdown-menu {
+    text-align: center;
+    display: none;
+    background-color: black;
+    padding: 0;
+}
+
+.dropdown-menu li {
+    border-bottom: 0;
+    margin-left: 40px;
+    padding-left: 0;
+    color: #449BEB;
+    line-height: 30px;
+
+}
+
+.dropdown-menu li:hover {
+    border-left: #DE57EB solid 5px;
+}
+
+.rotate span {
+    transform: rotate(-180deg);
+}
+
+.active {
+    background-color: whitesmoke;
+}
+
+.content {
+    margin-top: 50px;
+}
+
+.content.show {
+    margin-left: 250px;
+}

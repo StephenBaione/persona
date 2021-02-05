@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li>
+            <button id='Authentication Button' onclick="window.location='http://127.0.0.1:5000/auth/twitter'">
+                Authenticate Twitter
+            </button>
+        </li>
+    </ul>
+    <h1>
+        User_id: {{ session["user_id"] }} <br>
+        Screen Name: {{ session["screen_name"] }} <br>
+        Oauth Token: {{ session['oauth_token'] }} <br>
+        Oauth Verifier: {{ session['oauth_verifier'] }} <br>
+    </h1>
+
+    <div id="User Information">
+        <h2>
+
+        </h2>
+    </div>
+
+</body>
+</html>

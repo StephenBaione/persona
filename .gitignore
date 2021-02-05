@@ -1,0 +1,7 @@
+# Database
+*.db
+
+venv/
+.idea/
+
+.DS_STORE

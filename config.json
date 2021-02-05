@@ -1,0 +1,104 @@
+{
+  "services": {
+    "spotify": {
+      "credentials": {
+        "client_id": "3656a63cf4f547fd9c03f80a208c2e31",
+        "client_secret": "dbcfa2b2a2a242d0b675417adceb6c57",
+        "token": "MzY1NmE2M2NmNGY1NDdmZDljMDNmODBhMjA4YzJlMzE6ZGJjZmEyYjJhMmEyNDJkMGI2NzU0MTdhZGNlYjZjNTc=",
+        "refresh_token": ""
+      },
+      "urls": {
+        "authorize": {
+          "method": "GET",
+          "url": "https://accounts.spotify.com/authorize",
+          "query_params": {
+            "client_id": "3656a63cf4f547fd9c03f80a208c2e31",
+            "response_type": "code",
+            "redirect_uri": "http://127.0.0.1:5000/auth/spotify/",
+            "state": null,
+            "scope": null,
+            "show_dialog": false
+          },
+          "body": null,
+          "header": null
+        },
+        "token_request": {
+          "method": "POST",
+          "url": "https://accounts.spotify.com/api/token",
+          "query_params": null,
+          "body": {
+            "grant_type": "authorization_code",
+            "code": null,
+            "redirect_uri": "http://127.0.0.1:5000/auth/spotify/"
+          },
+          "header": {
+            "Authorization": "Basic MzY1NmE2M2NmNGY1NDdmZDljMDNmODBhMjA4YzJlMzE6ZGJjZmEyYjJhMmEyNDJkMGI2NzU0MTdhZGNlYjZjNTc="
+          }
+        },
+        "token_refresh": {
+          "method": "POST",
+          "url": "https://accounts.spotify.com/api/token",
+          "query_params": null,
+          "body": {
+            "grant_type": "refresh_token",
+            "refresh_token": null
+          },
+          "header": {
+            "Authorization": "Authorization: Basic MzY1NmE2M2NmNGY1NDdmZDljMDNmODBhMjA4YzJlMzE6ZGJjZmEyYjJhMmEyNDJkMGI2NzU0MTdhZGNlYjZjNTc="
+          }
+        }
+      }
+    },
+    "twitter": {
+      "credentials": {
+        "api_key": "dXQUrfBR8juh1iUyoMcgkiqqB",
+        "api_secret_key": "TQiZ8N9navBdcaSBmiJ9GSCVZNbgqaHwxRSU5wl7NdAMucQ4Mt",
+        "bearer_token": "AAAAAAAAAAAAAAAAAAAAABUwKQEAAAAAWzGYTWM9i2RPliUYbEa2wOp%2B8Ko%3DwIM9ZnXVvyAKyULtrxUw8DHrSVtoGIRWVnBO7MVhbyQEXVzLRR",
+        "token_code": "TZnycAAAAAABKTAVAAABdyK_3UA",
+        "oauth_token": "oLXq4wAAAAABKTAVAAABdyLFeik",
+        "oauth_verifier": "jlSaOXv2hjjxAB4xpkbeu93fvB9VDGQi"
+      },
+      "urls": {
+        "authorize": {
+          "method": "GET",
+          "url": "https://accounts.spotify.com/authorize",
+          "query_params": {
+            "client_id": "3656a63cf4f547fd9c03f80a208c2e31",
+            "response_type": "code",
+            "redirect_uri": "http://127.0.0.1:5000/auth/twitter/redirect/",
+            "state": null,
+            "scope": null,
+            "show_dialog": false
+          },
+          "body": null,
+          "header": null
+        },
+        "token_request": {
+          "method": "POST",
+          "url": "https://accounts.spotify.com/api/token",
+          "query_params": null,
+          "body": {
+            "grant_type": "authorization_code",
+            "code": null,
+            "redirect_uri": "http://127.0.0.1:5000/auth/spotify/"
+          },
+          "header": {
+            "Authorization": "Basic MzY1NmE2M2NmNGY1NDdmZDljMDNmODBhMjA4YzJlMzE6ZGJjZmEyYjJhMmEyNDJkMGI2NzU0MTdhZGNlYjZjNTc="
+          }
+        },
+        "token_refresh": {
+          "method": "POST",
+          "url": "https://accounts.spotify.com/api/token",
+          "query_params": null,
+          "body": {
+            "grant_type": "refresh_token",
+            "refresh_token": null
+          },
+          "header": {
+            "Authorization": "Authorization: Basic MzY1NmE2M2NmNGY1NDdmZDljMDNmODBhMjA4YzJlMzE6ZGJjZmEyYjJhMmEyNDJkMGI2NzU0MTdhZGNlYjZjNTc="
+          }
+        }
+      }
+    }
+  }
+}

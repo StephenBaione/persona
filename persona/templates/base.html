@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/base.css">
+    <title>Persona</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+    <div class="navigation-container">
+        <div class="navbar navigation-item" id="navbar">
+                <div id="toggle-div">
+                    <a class="toggleMenu-btn nav-item" id="toggle-button" onclick="toggleSideBar()">
+                        <span class="fas fa-bars"></span>
+                    </a>
+                </div>
+                <div id="logo-div">
+                    <a href="/">
+                        <span class="fas fa-brain"></span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a>
+                        <span class="fas fa-user-circle"></span>
+                    </a>
+                </div>
+                <a class="nav-item">
+                    Contact
+                </a>
+                <a class="nav-item">
+                    Services
+                </a>
+        </div>
+        <div class="sidebar" id="sidebar">
+            <h1>Persona</h1>
+            <ul class="sidebar-list">
+                <li>
+                    <a>Dashboard</a>
+                </li>
+                <li>
+                    <a id="sm-menubutton" onclick="activateSideMenuItem('sm-menubutton'); activateDropDown('sm-dropdown')">Social Media
+                        <span class="fas fa-caret-down" id="sm-span"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="sm-dropdown">
+                        <li><a>Instagram</a></li>
+                        <li><a>Twitter</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a id="music-button" onclick="activateSideMenuItem('music-button'); activateDropDown('music-dropdown')">Music
+                        <span class="fas fa-caret-down"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="music-dropdown">
+                        <li><a href={{ url_for("spotify.spotify_home") }}>Spotify</a></li>
+                        <li><a>Apple Music</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a id="health-button" onclick="activateSideMenuItem('health-button'); activateDropDown('health-dropdown')">Health & Fitness
+                        <span class="fas fa-caret-down"></span>
+                    </a>
+                        <ul class="dropdown-menu" id="health-dropdown">
+                            <li><a>Apple Health</a></li>
+                            <li><a>Run+</a></li>
+                        </ul>
+                </li>
+                <li>
+                    <a id="finance-button" onclick="activateSideMenuItem('finance-button'); activateDropDown('finance-dropdown')">Finance
+                        <span class="fas fa-caret-down"></span>
+                    </a>
+                        <ul class="dropdown-menu" id="finance-dropdown">
+                            <li><a>Robinhood</a></li>
+                            <li><a>Sink or Swim</a></li>
+                        </ul>
+                </li>
+                <li>
+                    <a>Community</a>
+                </li>
+            </ul>
+        </div>
+        <div class="content" id="content-container">
+            {% block content %}{% endblock %}
+        </div>
+        <script>
+            function toggleSideBar() {
+                let sideBar = document.getElementById('sidebar');
+                let content = document.getElementById('content-container');
+                if(sideBar.classList.contains('show')) {
+                    sideBar.classList.remove('show');
+                    content.classList.remove('show');
+                }
+                else {
+                    sideBar.classList.add('show');
+                    content.classList.add('show');
+                }
+                let navBar = document.getElementById("navbar");
+                if(navBar.classList.contains('click')) {
+                    navBar.classList.remove('click');
+                }
+                else {
+                    navBar.classList.add('click');
+                }
+                let toggleMenuButton = document.getElementById('toggle-button');
+                if(toggleMenuButton.classList.contains('click')) {
+                    toggleMenuButton.classList.remove('click');
+                }
+                else {
+                    toggleMenuButton.classList.add('click');
+                }
+            }
+
+            function activateSideMenuItem (id) {
+                let element = document.getElementById(id);
+                if(element.classList.contains('rotate')) {
+                    element.classList.remove('rotate');
+                }
+                else {
+                    element.classList.add('rotate');
+                }
+            }
+
+            function activateDropDown (id) {
+                let element = document.getElementById(id);
+                if(getComputedStyle(element).display === "block") {
+                    element.style.display = "none";
+                }
+                else {
+                    element.style.display = "block";
+                }
+            }
+        </script>
+    </div>
+    {% endblock %}
+</body>
+</html>
