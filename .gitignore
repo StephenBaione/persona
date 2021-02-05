@@ -3,5 +3,6 @@
 
 venv/
 .idea/
-
+__pycache__/
+icons/
 .DS_STORE
