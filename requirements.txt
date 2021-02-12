@@ -1,1 +1,7 @@
 werkzeug
+flask
+flask_sqlalchemy
+oauthlib
+jupyterlab
+flask_wtf
+wtforms
