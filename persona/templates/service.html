@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="../static/css/service.css">
+{% endblock %}
+
+{% block body %}
+    {{ super() }}
+    <footer>
+        <div id="footer-wrapper">
+            <ul id="footer-row">
+                <li><span class="fas fa-tachometer-alt"></span></li>
+                <li><span class="fas fa-chart-line"></span></li>
+                <li><span class="fas fa-network-wired"></span></li>
+            </ul>
+        </div>
+    </footer>
+{% endblock %}
+

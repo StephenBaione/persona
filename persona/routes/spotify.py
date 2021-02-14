@@ -11,19 +11,21 @@ bp = Blueprint('spotify', __name__, url_prefix="/spotify")
 def spotify_home():
     if not check_if_logged_in():
         return redirect(url_for("auth.login"))
-    try:
-        token = session['spotify_token']
-    except Exception as e:
+    # Check if authorization has already occured
+    user_id = session["id"]
+    if not spotify_model_handler.check_for_existing_spotify_auth(user_id):
         return redirect(url_for("spotify.request_authorization"))
+    token = spotify_model_handler.load_auth_token(user_id)
     sp = SpotifyAPI(token)
-    profile_data = sp.get_current_user_profile()
-    profile_data["username"] = session["username"]
-    profile_data["token"] = token
-    spotify_model_handler.create_or_update_spotify_object_from_json(profile_data)
+    sp.check_and_handle_token_expiration()
     spotify = spotify_model_handler.load_object_from_user_id(session["id"])
-    top_tracks = sp.get_users_top_artists()
-    print(top_tracks)
-    return render_template("spotify.html", spotify=spotify, top_tracks=top_tracks)
+    top_artists = sp.get_users_top_artists()
+    top_tracks = sp.get_top_tracks()
+    audio_features = sp.get_track_analysis(top_tracks)
+    while audio_features is None:
+        audio_features = sp.get_track_analysis(top_tracks)
+    return render_template("spotify.html", spotify=spotify,
+                           top_artists=top_artists, top_tracks=top_tracks, audio_features=audio_features)
 
 
 @bp.route('/auth/', methods=["GET"])
@@ -37,8 +39,14 @@ def request_authorization():
 
 @bp.route('/auth/redirect', methods=["GET"])
 def request_token():
+    if not check_if_logged_in():
+        return redirect(url_for("auth.login"))
     code = request.args.get("code")
     authentication = SpotifyAuthentication()
     token = authentication.request_token(code)
-    session["spotify_token"] = token
+    sp = SpotifyAPI(token)
+    profile_data = sp.get_current_user_profile()
+    profile_data["token"] = token
+    user_id = session["id"]
+    spotify_model_handler.create_spotify_object_from_json(user_id, profile_data)
     return redirect(url_for("spotify.spotify_home"))

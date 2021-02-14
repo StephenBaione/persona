@@ -83,3 +83,6 @@ class Image(db.Model):
     height = db.Column(db.Integer(), nullable=True)
     width = db.Column(db.Integer(), nullable=True)
     relationship = db.Column(db.Integer(), db.ForeignKey('spotify.id'))
+
+
+

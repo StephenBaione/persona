@@ -3,25 +3,24 @@ from . import User, Spotify
 from . import persona_model_handler
 
 
-def create_or_update_spotify_object_from_json(data: dict):
-    display_name = data["display_name"]
-    sp = Spotify.query.filter_by(display_name=display_name).first()
-    if sp is not None:
-        update_spotify_object_from_json(sp, data)
-    else:
-        create_spotify_object_from_json(sp, data)
+def check_for_existing_spotify_auth(user_id):
+    spotify = Spotify.query.filter_by(id=user_id).first()
+    if spotify is None:
+        return False
+    return True
 
 
-def update_spotify_object_from_json(sp_object, data: dict):
-    pass
+def update_spotify_object_from_json(user_id, data: dict):
+    sp_object = load_object_from_user_id(user_id)
+    for field, value in data.items():
+        sp_object.__setattr__(field, value)
 
 
-def create_spotify_object_from_json(sp_object, data: dict):
-    persona_username = data['username']
+def create_spotify_object_from_json(user_id, data: dict):
     #if not check_if_in_table('user', persona_username):
     #    raise ValueError(f"User: {persona_username} is not in database. "
     #                     f"Persona User must be created before service objects")
-    persona_user = persona_model_handler.load_user("username", persona_username)
+    persona_user = persona_model_handler.load_user("id", user_id)
     country = data['country']
     display_name = data['display_name']
     email = data['email']
@@ -40,11 +39,6 @@ def create_spotify_object_from_json(sp_object, data: dict):
     type = data['type']
     uri = data['uri']
     token = data["token"]
-    access_token = token["access_token"]
-    token_type = token["token_type"]
-    expires_at = token["expires_at"]
-    refresh_token = token["refresh_token"]
-    scopes = token["scope"]
 
     kwargs = {
         "country": country,
@@ -59,7 +53,8 @@ def create_spotify_object_from_json(sp_object, data: dict):
         "product": product,
         "type": type,
         "uri": uri,
-        "user": persona_user
+        "user": persona_user,
+        "token": token
     }
     spotify = Spotify(**kwargs)
     try:
@@ -69,6 +64,22 @@ def create_spotify_object_from_json(sp_object, data: dict):
     except Exception as e:
         print("Error adding spotify object to database\n")
         print(e)
+
+
+def load_auth_token(user_id):
+    sp = Spotify.query.filter_by(user_id=user_id).first()
+    access_token = sp.access_token
+    token_type = sp.token_type
+    expires_at = sp.expires_at
+    refresh_token = sp.refresh_token
+    scopes = sp.scopes
+    return {
+        "access_token": access_token,
+        "token_type": token_type,
+        "expires_at": expires_at,
+        "refresh_token": refresh_token,
+        "scopes": scopes
+    }
 
 
 def check_if_in_table(table_name, query_value):

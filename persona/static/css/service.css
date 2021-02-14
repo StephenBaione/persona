@@ -1,0 +1,44 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
+
+#footer-wrapper {
+    margin-bottom: 0;
+    background-color: #983EFA;
+    width: 100%;
+    height: 100%;
+}
+
+#footer-row {
+    list-style: none;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 0;
+}
+
+#footer-row li {
+    display: inline-block;
+    height: 100%;
+    width: 33%;
+    text-align: center;
+    font-size: 35px;
+    transition: background-color ease-in 0.3s;
+}
+
+#footer-row li span {
+    color: white;
+}
+
+#footer-row li:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+#footer-row li:hover span {
+    color: black;
+}

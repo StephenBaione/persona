@@ -1,10 +1,32 @@
+.content {
+    background-color: #1DB954;
+}
+
+#display-name-wrapper p {
+    display: inline-block;
+}
+
+#display-name {
+    font-size: 25px;
+}
+
+#display-name:hover {
+    font-size: 25px;
+}
+
+.fa-spotify:hover {
+    cursor: pointer;
+}
+
 .card {
     /* Add shadows to create the "card" effect */
-    !important width: 25%;
-    !important margin: 0 auto;
+    width: 75%;
+    margin: 0 auto;
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
+    background-color: white;
+    border-radius: 15px;
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -14,5 +36,90 @@
 
 /* Add some padding inside the card container */
 .container {
-  padding: 2px 16px;
+    padding: 2px 16px;
 }
+
+#title-div {
+    border-bottom: black solid 2px;
+}
+
+#spotify-logo {
+    width: 25%;
+}
+
+.sp-gallery {
+    list-style: none;
+}
+
+.artist-card {
+    display: inline-block;
+}
+
+.artist-image {
+    border-radius: 15px;
+}
+
+.artist-image:hover {
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+}
+
+.sp-gallery {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    border-top: black solid 2px;
+}
+
+.track-card {
+    display: inline-block;
+    border-right: gray none 1px;
+}
+
+.track-card-inner {
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.track-card:hover .track-card-inner {
+    transform: rotateY(180deg);
+}
+
+.track-card-front {
+    padding: 5px;
+    overflow-wrap: normal;
+    position: relative;
+    backface-visibility: hidden;
+}
+
+.track-card-back {
+    transform: rotateY(180deg);
+    background-color: #1DB954;
+    border-radius: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+}
+
+.analysis-item {
+    display: inline-block;
+}
+
+.analysis-row button {
+    background-color: #983EFA;
+    width: 50%;
+    border-radius: 10px;
+}
+
+.analysis-row button:hover {
+    cursor: pointer;
+}
+
+.item-bar {
+    background-color: #983EFA;
+}
+

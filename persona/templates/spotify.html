@@ -1,15 +1,82 @@
-{% extends "base.html" %}
+{% extends "service.html" %}
 
 {% block head %}
     {{ super() }}
     <link rel="stylesheet" href="../static/css/spotify.css">
+    <script src="../static/js/spotify.js"></script>
 {% endblock %}
 
 {% block content %}
     <div class="card">
         <div class="container">
-            <h4><b>{{ session["username"] }}'s Spotify</b></h4>
-            <p>{{ spotify.display_name }}</p>
+            <div id="title-div">
+                <img id="spotify-logo" src="../static/assets/spotify/Spotify_Logo_RGB_Green.png" alt="Spotify">
+            </div>
+            <h3><b>{{ session["username"] }}'s Spotify</b></h3>
+            <div id="display-name-wrapper">
+                <p id="display-name"><b><span class="fab fa-spotify" onclick="window.open('https://open.spotify.com/user/{{ spotify.uri.split(":")[-1] }}', '_blank')"></span>{{ spotify.display_name }}</b></p>
+                <p>Followers: {{ spotify.followers }}</p>
+            </div>
+            <div class="sp-gallery">
+                <h2 style="color: #983EFA"><b>Favorite Artists:</b></h2>
+                {%  for artist in top_artists %}
+                    <div class="artist-card">
+                        <p>{{ artist["name"] }}</p>
+                        <img class="artist-image" src={{ artist["images"][2]["url"] }} alt={{ artist["name"] }} onclick="window.open('https://open.spotify.com/artist/{{ artist["id"]}}', '_blank')">
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="sp-gallery">
+                <h2 style="color: #983EFA"><b>Favorite Tracks:</b></h2>
+                {%  for i in range(top_tracks.__len__()) %}
+                    <div class="track-card">
+                        <div class="track-card-inner">
+                            <div class="track-card-front">
+                                <img class="artist-image" src={{ top_tracks[i]["album"]["images"][1]["url"] }} alt={{ top_tracks[i]["name"] }}>
+                                <p>{{ top_tracks[i]["artists"][0]["name"] }} <br> {{ top_tracks[i]["name"] }}</p>
+                            </div>
+                            <div class="track-card-back" id="track-card-back">
+                                <div class="analysis-row">
+                                    <span class="fas fa-glass-cheers analysis-item"></span>
+                                    <p class="analysis-item analysis-feature"></p>
+                                </div>
+                                <div class="analysis-row">
+                                    <span class="fas fa-bolt analysis-item"></span>
+                                    <p class="analysis-item analysis-feature">Energy {{ audio_features[i]["energy"] * 100}}%</p>
+                                </div>
+                                <div class="analysis-row">
+                                    <span class="fas fa-music analysis-item"></span>
+                                    <p class="analysis-item analysis-feature">Key {{ audio_features[i]["key"] }}</p>
+                                </div>
+                                <div class="analysis-row">
+                                    <span class="fas fa-bullhorn analysis-item"></span>
+                                    <p class="analysis-item analysis-feature">Loudness {{ audio_features[i]["loudness"] / 60 }}%</p>
+                                </div>
+                                <div class="analysis-row">
+                                    <span class="fas fa-guitar analysis-item"></span>
+                                    <p class="analysis-item analysis-feature">Acousticness {{ audio_features[i]["acousticness"] * 100}}%</p>
+                                </div>
+                                <div class="analysis-row">
+                                    <span class="fas fa-heartbeat analysis-item"></span>
+                                    <p class="analysis-item analysis-feature">Liveness {{ audio_features[i]["liveness"] * 100}}%</p>
+                                </div>
+                                <div class="analysis-row">
+                                    <span class="fas fa-drum analysis-item"></span>
+                                    <p class="analysis-item analysis-feature">Tempo {{ audio_features[i]["tempo"] }}</p>
+                                </div>
+                                <div class="analysis-row">
+                                    <button onclick="window.open('https://open.spotify.com/track/{{ top_tracks[i]["id"]}}', '_blank');">Go to Track</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+            <div class="analysis-container">
+                <h3>Top Song Analysis</h3>
+                <canvas id="top_tracks" width="400" height="400"></canvas>
+            </div>
         </div>
     </div>
 {% endblock %}

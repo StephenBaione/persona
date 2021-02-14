@@ -1,4 +1,4 @@
-from flask import Blueprint, request, session, redirect, url_for, render_template, flash
+from flask import Blueprint, request, session, redirect, url_for, render_template, flash, make_response
 from persona.services.spotify.spotify_service import SpotifyAuthentication
 from persona.services.twitter.twitter_service import TwitterAuthentication
 from persona import db
@@ -13,12 +13,16 @@ def login():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
+        print(request.cookies.lists())
         if verify_login(username, password):
             session["logged_in"] = True
             session["username"] = username
+            res = make_response(redirect(url_for("persona.home")))
             user = load_user('username', username)
             session["id"] = user.id
-            return redirect(url_for("persona.home"))
+            res.set_cookie('test', 'test', max_age=60*60*24*30)
+            # return redirect(url_for("persona.home"))
+            return res
         else:
             flash("Invalid Credentials. Please try entering again.")
     return render_template("login.html", form=form)

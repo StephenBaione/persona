@@ -20,6 +20,10 @@
     content: '\f00d';
 }
 
+.fa-brain {
+    color: #983EFA;
+}
+
 .navbar a {
     display: inline-block;
     color: white;
@@ -38,7 +42,8 @@
 
 #logo-div {
     position: fixed;
-    left: 50%;
+    margin-left: 50%;
+    margin-right: 50%;
 }
 
 .navbar a:first-of-type {
@@ -76,7 +81,7 @@
     font-size: 35px;
     margin-left: 40px;
     margin-top: 10px;
-    color: purple;
+    color: #983EFA;
 }
 
 .sidebar-list {
@@ -126,13 +131,15 @@
     border-bottom: 0;
     margin-left: 40px;
     padding-left: 0;
-    color: #449BEB;
     line-height: 30px;
+}
 
+.dropdown-menu li a {
+    color: #00CFDE;
 }
 
 .dropdown-menu li:hover {
-    border-left: #DE57EB solid 5px;
+    border-left: #983EFA solid 5px;
 }
 
 .rotate span {
