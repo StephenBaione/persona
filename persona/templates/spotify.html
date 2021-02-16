@@ -4,6 +4,17 @@
     {{ super() }}
     <link rel="stylesheet" href="../static/css/spotify.css">
     <script src="../static/js/spotify.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            format_track_analysis_values({{ audio_features|tojson }});
+            populate_top_tracks_average_chart({{ average_top_features|tojson }});
+            populate_danceability_chart({{ audio_features|tojson }}, {{ top_tracks|tojson }});
+            populate_energy_chart({{ audio_features|tojson }}, {{ top_tracks|tojson }});
+            populate_loudness_chart({{ audio_features|tojson }}, {{ top_tracks|tojson }});
+            populate_acousticness_chart({{ audio_features|tojson }}, {{ top_tracks|tojson }});
+            populate_liveness_chart({{ audio_features|tojson }}, {{ top_tracks|tojson }});
+        };
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -75,8 +86,26 @@
             <br>
             <div class="analysis-container">
                 <h3>Top Song Analysis</h3>
-                <canvas id="top_tracks" width="400" height="400"></canvas>
+                <canvas class="sp-chart" id="top_tracks_average"></canvas>
+                <div class="sp-gallery">
+                    <div class="chart-wrapper">
+                        <canvas class="sp-chart" id="danceability-of-top-tracks"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas class="sp-chart" id="energy-of-top-tracks"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas class="sp-chart" id="loudness-of-top-tracks"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas class="sp-chart" id="acousticness-of-top-tracks"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas class="sp-chart" id="liveness-of-top-tracks"></canvas>
+                    </div>
+                </div>
             </div>
+            <div></div>
         </div>
     </div>
 {% endblock %}

@@ -9,10 +9,15 @@ from requests_oauthlib import OAuth1Session
 
 
 class TwitterAuthentication:
-    def __init__(self):
+    def __init__(self, oauth_token = None, verifier = None):
         self.api_key = "dXQUrfBR8juh1iUyoMcgkiqqB"
         self.api_secret_key = "TQiZ8N9navBdcaSBmiJ9GSCVZNbgqaHwxRSU5wl7NdAMucQ4Mt"
         self.twitter_callback_url = "http://127.0.0.1:5000/auth/twitter/redirect/"
+        if oauth_token is None:
+            self.oauth = OAuth1Session(self.api_key, client_secret=self.api_secret_key)
+        else:
+            self.token = oauth2.Token(oauth_token, verifier)
+
 
     def fetch_request_token(self):
         oauth = OAuth1Session(self.api_key, client_secret=self.api_secret_key)

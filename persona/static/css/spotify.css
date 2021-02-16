@@ -71,6 +71,11 @@
     border-top: black solid 2px;
 }
 
+.chart-wrapper {
+    display: inline-block;
+    width: 100%;
+}
+
 .track-card {
     display: inline-block;
     border-right: gray none 1px;
@@ -123,3 +128,10 @@
     background-color: #983EFA;
 }
 
+.sp-chart {
+    margin-top: 5px;
+    height: 400px;
+    width: 400px;
+    background-color: black;
+    border-radius: 15px;
+}
