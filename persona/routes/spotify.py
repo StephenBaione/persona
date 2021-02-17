@@ -17,10 +17,13 @@ def spotify_home():
     if not spotify_model_handler.check_for_existing_spotify_auth(user_id):
         return redirect(url_for("spotify.request_authorization"))
     token = spotify_model_handler.load_auth_token(user_id)
+    print(token)
     sp = SpotifyAPI(token)
     print("Checking for valid token...")
-    sp.check_and_handle_token_expiration()
-    spotify = spotify_model_handler.load_object_from_user_id(session["id"])
+    expired = sp.check_and_handle_token_expiration()
+    if expired:
+        spotify_model_handler.update_spotify_object_from_json(user_id, sp.client.get_token())
+    spotify = spotify_model_handler.load_object_from_user_id(user_id)
     top_artists = sp.get_users_top_artists()
     top_tracks = sp.get_top_tracks()
     audio_features = sp.get_track_analysis(top_tracks)

@@ -45,6 +45,7 @@ class SpotifyAuthentication:
             self.oauth = OAuth2Session(self.api_key, redirect_uri=self.spotify_redirect_url, scope=AUTHORIZATION_SCOPE)
         else:
             self.oauth = OAuth2Session(self.api_key, token=oauth_token)
+        self.token = oauth_token
 
     # -------- Authentication Flow --------
     def request_authorization(self):
@@ -81,17 +82,21 @@ class SpotifyAuthentication:
             print("Error obtaining refresh token")
             return False
         refresh_token = resp.json()
+        # need to add expires_at field to refresh_token
+        expires_at = time.time() + refresh_token["expires_in"]
+        refresh_token['expires_at'] = expires_at
         return refresh_token
 
     # -------- Token Methods --------
     def get_token(self):
-        return self.oauth.token
+        return self.token
 
     def set_token(self, token):
         self.oauth.token = token
+        self.token = token
 
     def check_for_token_expiration(self):
-        token = self.oauth.token
+        token = self.token
         expires_at = token["expires_at"]
         if time.time() >= expires_at:
             return True
@@ -131,14 +136,7 @@ class SpotifyAPI:
 
     def get_current_user_profile(self):
         get_user_url = "https://api.spotify.com/v1/me"
-        resp = self.client.get_url(get_user_url)
-        if resp.status_code != 200:
-            if self.check_and_handle_token_expiration():
-                resp = self.client.get_url(get_user_url)
-                data = resp.json()
-                return data
-        data = resp.json()
-        return data
+        return self.get_api_endpoint(get_user_url)
 
     def get_users_top_artists(self, **kwargs):
         get_top_url = "https://api.spotify.com/v1/me/top/artists"
@@ -150,12 +148,7 @@ class SpotifyAPI:
             "limit": limit,
             "offset": offset,
         }
-        resp = self.client.get_url(get_top_url, params)
-        if resp.status_code != 200:
-            print(resp.reason)
-            return "Error getting top Artists"
-        data = resp.json()
-        return data["items"]
+        return self.get_api_endpoint(get_top_url, params)['items']
 
     def get_top_tracks(self, **kwargs):
         get_top_url = "https://api.spotify.com/v1/me/top/tracks"
@@ -167,12 +160,7 @@ class SpotifyAPI:
             "limit": limit,
             "offset": offset,
         }
-        resp = self.client.get_url(get_top_url, params)
-        if resp.status_code != 200:
-            print(resp.reason)
-            return "Error getting top Artists"
-        data = resp.json()
-        return data["items"]
+        return self.get_api_endpoint(get_top_url, params)['items']
 
     def get_track_analysis(self, tracks):
         get_analysis_url = "https://api.spotify.com/v1/audio-features"
@@ -183,26 +171,19 @@ class SpotifyAPI:
         params = {
             "ids": track_ids
         }
-        resp = self.client.get_url(get_analysis_url, params)
-        if resp.status_code != 200:
-            print(resp.reason)
-            return None
-        data = resp.json()
-        return data["audio_features"]
+        return self.get_api_endpoint(get_analysis_url, params)['audio_features']
 
-    def get_saved_tracks(self, **kwargs):
+    def get_saved_tracks(self, params=None):
         get_tracks_url = "https://api.spotify.com/v1/me/tracks"
-        market = kwargs.get("market", "US")
-        limit = kwargs.get("limit", 50)
-        offset = kwargs.get("offset", 0)
-        params = {
-            "market": market,
-            "limit": limit,
-            "offset": offset
-        }
-        resp = self.client.get_url(get_tracks_url, params)
+        return self.get_api_endpoint(get_tracks_url, params)["items"]
+
+    def get_api_endpoint(self, base_url, params=None):
+        self.check_and_handle_token_expiration()
+        if params is None:
+            resp = self.client.get_url(base_url)
+        else:
+            resp = self.client.get_url(base_url, params)
         if resp.status_code != 200:
-            print(resp.reason)
             return None
         data = resp.json()
         return data
