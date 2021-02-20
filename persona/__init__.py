@@ -27,7 +27,7 @@ app.secret_key = os.urandom(24)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 
 # Import db from models module. Created in models module to resolve potential circular dependencies
-from .models import db, User, Spotify
+from .models import db, User, Spotify, Twitter, Tweet
 
 
 migrate = Migrate(app, db)
@@ -36,31 +36,13 @@ manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
 user = User
-print(user.query.all())
 
 # Import routes after app and db has been already created
 from .routes.spotify import bp as spotify_bp
 from .routes.auth import bp as auth_bp
 from .routes.persona import bp as persona_bp
+from .routes.twitter import bp as twitter_bp
 app.register_blueprint(spotify_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(persona_bp)
-
-
-"""
--------- Twitter --------
-"""
-@app.route("/twitter", methods=["GET"])
-def twitter_home():
-    if session["twitter_verified"] == "true":
-        oauth_token = session["oauth_token"]
-        oauth_verifier = session["oauth_verifier"]
-        user_id = session["user_id"]
-        twitter_api = TwitterAPI(oauth_token, oauth_verifier, user_id)
-        twitter_api.show_user()
-    return render_template("twitter.html")
-
-
-
-
-
+app.register_blueprint(twitter_bp)

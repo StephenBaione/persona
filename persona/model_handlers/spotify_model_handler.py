@@ -12,14 +12,17 @@ def check_for_existing_spotify_auth(user_id):
 
 def update_spotify_object_from_json(user_id, data: dict):
     sp_object = load_object_from_user_id(user_id)
+    if sp_object is None:
+        return False
     for field, value in data.items():
         sp_object.__setattr__(field, value)
+    db.session.commit()
+    return True
 
 
 def create_spotify_object_from_json(user_id, data: dict):
-    #if not check_if_in_table('user', persona_username):
-    #    raise ValueError(f"User: {persona_username} is not in database. "
-    #                     f"Persona User must be created before service objects")
+    if check_for_existing_spotify_auth(user_id):
+        return False
     persona_user = persona_model_handler.load_user("id", user_id)
     country = data['country']
     display_name = data['display_name']

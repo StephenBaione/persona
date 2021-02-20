@@ -1,3 +1,3 @@
-from persona import db, User, Spotify
+from persona import db, User, Spotify, Twitter, Tweet
 
 

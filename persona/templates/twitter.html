@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "service.html" %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
     <ul>
         <li>
-            <button id='Authentication Button' onclick="window.location='http://127.0.0.1:5000/auth/twitter'">
+            <button id='Authentication Button' onclick="window.location='http://127.0.0.1:5000/twitter/auth'">
                 Authenticate Twitter
             </button>
         </li>
@@ -18,12 +18,12 @@
         Oauth Token: {{ session['oauth_token'] }} <br>
         Oauth Verifier: {{ session['oauth_verifier'] }} <br>
     </h1>
+    <blockquote class="twitter-tweet" align="center"><p lang="en" dir="ltr">Second dropped TD of the game. I guess hitting a receiver in the face mask isn’t good enough right now</p>&mdash; Stephen Baione (@stephenbaione20) <a href="https://twitter.com/stephenbaione20/status/1358604175051997190?ref_src=twsrc%5Etfw">February 8, 2021</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 
     <div id="User Information">
         <h2>
 
         </h2>
     </div>
-
-</body>
-</html>
+{% endblock %}
