@@ -127,3 +127,7 @@ class Tweet(db.Model):
         self.filter_level = kwargs.get("filter_level", None)
         self.lang = kwargs.get("lang", None)
 
+
+
+
+

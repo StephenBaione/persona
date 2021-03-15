@@ -1,10 +1,10 @@
 from persona import app
 from flask_sqlalchemy import SQLAlchemy
-
+from sqlalchemy import MetaData
 
 db = SQLAlchemy(app)
 
-from .spotify_models import Spotify
+from .spotify_models import Spotify, Image, AlbumObject, ArtistObject, TopArtists, TrackObject, AudioFeatures, TopTracks
 from .persona_models import User
 from .twitter_models import Twitter, Tweet
 

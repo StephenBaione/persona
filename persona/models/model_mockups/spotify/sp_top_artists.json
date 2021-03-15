@@ -1,0 +1,379 @@
+[
+  {
+    "external_urls": {
+      "spotify": "https://open.spotify.com/artist/1Xyo4u8uXC1ZmMpatF05PJ"
+    },
+    "followers": {
+      "href": null,
+      "total": 29691235
+    },
+    "genres": [
+      "canadian contemporary r&b",
+      "canadian pop",
+      "pop"
+    ],
+    "href": "https://api.spotify.com/v1/artists/1Xyo4u8uXC1ZmMpatF05PJ",
+    "id": "1Xyo4u8uXC1ZmMpatF05PJ",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/37376dba0623c33923eae9d234e5e199b76d227f",
+        "width": 640
+      },
+      {
+        "height": 320,
+        "url": "https://i.scdn.co/image/bf5643a4223bb6483f5b0b981bce1cf7b5f92f84",
+        "width": 320
+      },
+      {
+        "height": 160,
+        "url": "https://i.scdn.co/image/8a188b7236f3c78416a3f75c9da52957ed3bcb9b",
+        "width": 160
+      }
+    ],
+    "name": "The Weeknd",
+    "popularity": 98,
+    "type": "artist",
+    "uri": "spotify:artist:1Xyo4u8uXC1ZmMpatF05PJ"
+  },
+  {
+    "external_urls": {
+      "spotify": "https://open.spotify.com/artist/5K4W6rqBFWDnAN6FQUkS6x"
+    },
+    "followers": {
+      "href": null,
+      "total": 13423154
+    },
+    "genres": [
+      "chicago rap",
+      "rap"
+    ],
+    "href": "https://api.spotify.com/v1/artists/5K4W6rqBFWDnAN6FQUkS6x",
+    "id": "5K4W6rqBFWDnAN6FQUkS6x",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/bd1c6fdf3705cf9b7d0c8ac8e7bbed98e31a1559",
+        "width": 640
+      },
+      {
+        "height": 320,
+        "url": "https://i.scdn.co/image/b1414e865a16bc0080085ee1901d0bfd19f83fcb",
+        "width": 320
+      },
+      {
+        "height": 160,
+        "url": "https://i.scdn.co/image/ac5cb571c194ca5a942b8096618217839b901a76",
+        "width": 160
+      }
+    ],
+    "name": "Kanye West",
+    "popularity": 93,
+    "type": "artist",
+    "uri": "spotify:artist:5K4W6rqBFWDnAN6FQUkS6x"
+  },
+  {
+    "external_urls": {
+      "spotify": "https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4"
+    },
+    "followers": {
+      "href": null,
+      "total": 53430958
+    },
+    "genres": [
+      "canadian hip hop",
+      "canadian pop",
+      "hip hop",
+      "pop rap",
+      "rap",
+      "toronto rap"
+    ],
+    "href": "https://api.spotify.com/v1/artists/3TVXtAsR1Inumwj472S9r4",
+    "id": "3TVXtAsR1Inumwj472S9r4",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/60cfab40c6bb160a1906be45276829d430058005",
+        "width": 640
+      },
+      {
+        "height": 320,
+        "url": "https://i.scdn.co/image/5ea794cf832550943d5f8122afcf5f23ee9d85b7",
+        "width": 320
+      },
+      {
+        "height": 160,
+        "url": "https://i.scdn.co/image/8eaace74aaca82eaccde400bbcab2653b9cf86e1",
+        "width": 160
+      }
+    ],
+    "name": "Drake",
+    "popularity": 98,
+    "type": "artist",
+    "uri": "spotify:artist:3TVXtAsR1Inumwj472S9r4"
+  },
+  {
+    "external_urls": {
+      "spotify": "https://open.spotify.com/artist/2wY79sveU1sp5g7SokKOiI"
+    },
+    "followers": {
+      "href": null,
+      "total": 15655319
+    },
+    "genres": [
+      "dance pop",
+      "pop",
+      "post-teen pop",
+      "uk pop"
+    ],
+    "href": "https://api.spotify.com/v1/artists/2wY79sveU1sp5g7SokKOiI",
+    "id": "2wY79sveU1sp5g7SokKOiI",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/ec0ac1a0f41100f8188a3f17e5b351780b4d173b",
+        "width": 640
+      },
+      {
+        "height": 320,
+        "url": "https://i.scdn.co/image/c8d7899729ab345f14cd38cd4d15500db4563259",
+        "width": 320
+      },
+      {
+        "height": 160,
+        "url": "https://i.scdn.co/image/21ffe12a27732a65c0c84f29bbf00614c050a6de",
+        "width": 160
+      }
+    ],
+    "name": "Sam Smith",
+    "popularity": 89,
+    "type": "artist",
+    "uri": "spotify:artist:2wY79sveU1sp5g7SokKOiI"
+  },
+  {
+    "external_urls": {
+      "spotify": "https://open.spotify.com/artist/4GNC7GD6oZMSxPGyXy4MNB"
+    },
+    "followers": {
+      "href": null,
+      "total": 7123458
+    },
+    "genres": [
+      "pop",
+      "uk pop"
+    ],
+    "href": "https://api.spotify.com/v1/artists/4GNC7GD6oZMSxPGyXy4MNB",
+    "id": "4GNC7GD6oZMSxPGyXy4MNB",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/5ed13d249e562fea4e296aaeb745ce06d27ec88f",
+        "width": 640
+      },
+      {
+        "height": 320,
+        "url": "https://i.scdn.co/image/989e66429854c7148ac7363a7d09509240c1f1ba",
+        "width": 320
+      },
+      {
+        "height": 160,
+        "url": "https://i.scdn.co/image/a47d5d5fa6082abfeff7e3b90bff93fb81ce345a",
+        "width": 160
+      }
+    ],
+    "name": "Lewis Capaldi",
+    "popularity": 87,
+    "type": "artist",
+    "uri": "spotify:artist:4GNC7GD6oZMSxPGyXy4MNB"
+  },
+  {
+    "external_urls": {
+      "spotify": "https://open.spotify.com/artist/137W8MRPWKqSmrBGDBFSop"
+    },
+    "followers": {
+      "href": null,
+      "total": 9807254
+    },
+    "genres": [
+      "hip hop",
+      "pittsburgh rap",
+      "pop rap",
+      "rap",
+      "southern hip hop",
+      "trap"
+    ],
+    "href": "https://api.spotify.com/v1/artists/137W8MRPWKqSmrBGDBFSop",
+    "id": "137W8MRPWKqSmrBGDBFSop",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/119b0e8f0ddd4cfc13945e69205e201750b6006c",
+        "width": 640
+      },
+      {
+        "height": 320,
+        "url": "https://i.scdn.co/image/52820589a9f9ba23ca8d8598109ba6e739d61f77",
+        "width": 320
+      },
+      {
+        "height": 160,
+        "url": "https://i.scdn.co/image/e3d91022edb1dfabecea149ba0d35a4ba5d3be50",
+        "width": 160
+      }
+    ],
+    "name": "Wiz Khalifa",
+    "popularity": 89,
+    "type": "artist",
+    "uri": "spotify:artist:137W8MRPWKqSmrBGDBFSop"
+  },
+  {
+    "external_urls": {
+      "spotify": "https://open.spotify.com/artist/2cFrymmkijnjDg9SS92EPM"
+    },
+    "followers": {
+      "href": null,
+      "total": 3992374
+    },
+    "genres": [
+      "electropop",
+      "pop",
+      "pop rap"
+    ],
+    "href": "https://api.spotify.com/v1/artists/2cFrymmkijnjDg9SS92EPM",
+    "id": "2cFrymmkijnjDg9SS92EPM",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/87ee7b72bab2721e5a3665aeb48309f411ac6df8",
+        "width": 640
+      },
+      {
+        "height": 320,
+        "url": "https://i.scdn.co/image/a9a8a88696ab09b1f282d0cda0b4b9d8e5f1a22b",
+        "width": 320
+      },
+      {
+        "height": 160,
+        "url": "https://i.scdn.co/image/219f2f09b833e3716f3871014bd49d35c4224036",
+        "width": 160
+      }
+    ],
+    "name": "blackbear",
+    "popularity": 88,
+    "type": "artist",
+    "uri": "spotify:artist:2cFrymmkijnjDg9SS92EPM"
+  },
+  {
+    "external_urls": {
+      "spotify": "https://open.spotify.com/artist/3nFkdlSjzX9mRTtwJOzDYB"
+    },
+    "followers": {
+      "href": null,
+      "total": 6012594
+    },
+    "genres": [
+      "east coast hip hop",
+      "hip hop",
+      "pop rap",
+      "rap"
+    ],
+    "href": "https://api.spotify.com/v1/artists/3nFkdlSjzX9mRTtwJOzDYB",
+    "id": "3nFkdlSjzX9mRTtwJOzDYB",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/4912d27d6b01dd790313d8ef76586be6b100550f",
+        "width": 640
+      },
+      {
+        "height": 320,
+        "url": "https://i.scdn.co/image/027c5605d895158497ff377d92d69fe89dba1730",
+        "width": 320
+      },
+      {
+        "height": 160,
+        "url": "https://i.scdn.co/image/1420226e471d0e56ae4de7cb28ba2eb4de0a29ce",
+        "width": 160
+      }
+    ],
+    "name": "JAY-Z",
+    "popularity": 88,
+    "type": "artist",
+    "uri": "spotify:artist:3nFkdlSjzX9mRTtwJOzDYB"
+  },
+  {
+    "external_urls": {
+      "spotify": "https://open.spotify.com/artist/7dGJo4pcD2V6oG8kP0tJRR"
+    },
+    "followers": {
+      "href": null,
+      "total": 42225570
+    },
+    "genres": [
+      "detroit hip hop",
+      "hip hop",
+      "rap"
+    ],
+    "href": "https://api.spotify.com/v1/artists/7dGJo4pcD2V6oG8kP0tJRR",
+    "id": "7dGJo4pcD2V6oG8kP0tJRR",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/56f4762485066b4ef867b96e16775f2b5b4db277",
+        "width": 640
+      },
+      {
+        "height": 320,
+        "url": "https://i.scdn.co/image/ad64a7fbc24b31cd84455a1aef34758b94246352",
+        "width": 320
+      },
+      {
+        "height": 160,
+        "url": "https://i.scdn.co/image/6432e1be8495593f136ad98de6135bb0640ff936",
+        "width": 160
+      }
+    ],
+    "name": "Eminem",
+    "popularity": 95,
+    "type": "artist",
+    "uri": "spotify:artist:7dGJo4pcD2V6oG8kP0tJRR"
+  },
+  {
+    "external_urls": {
+      "spotify": "https://open.spotify.com/artist/23fqKkggKUBHNkbKtXEls4"
+    },
+    "followers": {
+      "href": null,
+      "total": 7243605
+    },
+    "genres": [
+      "edm",
+      "pop",
+      "pop dance",
+      "tropical house"
+    ],
+    "href": "https://api.spotify.com/v1/artists/23fqKkggKUBHNkbKtXEls4",
+    "id": "23fqKkggKUBHNkbKtXEls4",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/eee84c026e93f6d970fdc82c5010c45219530577",
+        "width": 640
+      },
+      {
+        "height": 320,
+        "url": "https://i.scdn.co/image/88aed04adde2b3bdab332abb9b9d071d1fbe1701",
+        "width": 320
+      },
+      {
+        "height": 160,
+        "url": "https://i.scdn.co/image/750bda7060bd0b22a9a2fb65e27f05120a0d056e",
+        "width": 160
+      }
+    ],
+    "name": "Kygo",
+    "popularity": 87,
+    "type": "artist",
+    "uri": "spotify:artist:23fqKkggKUBHNkbKtXEls4"
+  }
+]

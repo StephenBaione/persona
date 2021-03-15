@@ -1,5 +1,6 @@
 # TODO:// Create model_handler
 from . import db
+import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -29,6 +30,7 @@ class User(db.Model):
     spotify_connected = db.Column(db.Boolean(), unique=False, default=False)
     spotify = db.relationship("Spotify", uselist=False, back_populates="user")
     twitter = db.relationship("Twitter", uselist=False, back_populates="user")
+
 
     @property
     def password(self):

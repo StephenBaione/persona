@@ -24,13 +24,14 @@ def save_config_param(service, path, key, value):
 # Create app prior to import anything involving database
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Volumes/Seagate Backup /databases/app.db'
+app.debug = True
 
 # Import db from models module. Created in models module to resolve potential circular dependencies
-from .models import db, User, Spotify, Twitter, Tweet
+from .models import *
 
 
-migrate = Migrate(app, db)
+migrate = Migrate(app, db, render_as_batch=True, compare_type=True)
 
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
