@@ -120,6 +120,23 @@ class SpotifyAPI:
         self.api_secret_key = "dbcfa2b2a2a242d0b675417adceb6c57"
         self.client = SpotifyAuthentication(oauth_token=oauth_token)
 
+    def handle_errors(self, resp, func, *args, **kwargs):
+        # Rate limit reached
+        if resp.status_code == 429:
+            print("Rate limit reached...")
+            retry_after = resp.headers['Retry-After'] + 1
+            print(f"Retrying After: {retry_after} seconds")
+            time.sleep(retry_after)
+            if len(kwargs.keys()) != 0:
+                return func(*args, **kwargs)
+            return func(*args)
+        # No Content
+        elif resp.status_code == 204:
+            print(resp.reason)
+            return None
+        else:
+            print(resp.status_code, resp.reason)
+
     def check_and_handle_token_expiration(self):
         expired = self.check_for_token_expiration()
         if expired:
@@ -376,6 +393,7 @@ class SpotifyAPI:
         return self.get_api_endpoint(get_tracks_url, params)
 
     def get_track_analysis(self, tracks):
+        # TODO:// This function should not assume that all tracks being passed are JSON
         get_analysis_url = "https://api.spotify.com/v1/audio-features"
         track_ids = []
         for track in tracks:
@@ -421,6 +439,17 @@ class SpotifyAPI:
             params['include_external'] = include_external
         return self.get_api_endpoint(get_search_url, params)
 
+    def get_currently_playing_track(self, **kwargs):
+        get_currently_playing_url = "https://api.spotify.com/v1/me/player/currently-playing"
+        market = kwargs.get("market", "US")
+        additional_types = kwargs.get("additional_types", None)
+        params = {
+            "market": market
+        }
+        if additional_types is not None:
+            params['additional_types'] = additional_types
+        return self.get_api_endpoint(get_currently_playing_url, params)
+
     def get_api_endpoint(self, base_url, params=None):
         self.check_and_handle_token_expiration()
         if params is None:
@@ -428,9 +457,7 @@ class SpotifyAPI:
         else:
             resp = self.client.get_url(base_url, params)
         if resp.status_code != 200:
-            if resp.status_code == 429:
-                time.sleep(5)
-            print(resp.text)
-            return None
+            print("error")
+            return self.handle_errors(resp, self.get_api_endpoint, base_url, params)
         data = resp.json()
         return data

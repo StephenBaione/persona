@@ -1,6 +1,11 @@
 from . import db
 from sqlalchemy import func
 
+spotify_to_saved_tracks_association_table = db.Table("spotify_to_saved_tracks", db.Model.metadata,
+                                                     db.Column('spotify_id', db.Integer, db.ForeignKey('spotify.id')),
+                                                     db.Column('track_id', db.String(80),
+                                                               db.ForeignKey('track_object.id')))
+
 
 class Spotify(db.Model):
     __tablename__ = 'spotify'
@@ -33,6 +38,10 @@ class Spotify(db.Model):
     images = db.relationship("Image")
     top_artists = db.relationship("TopArtists", backref='spotify', lazy=True)
     top_tracks = db.relationship("TopTracks", backref='spotify', lazy=True)
+    listening_session = db.relationship("ListeningSession", backref='spotify', lazy=True)
+    saved_tracks = db.relationship("TrackObject",
+                                   secondary=spotify_to_saved_tracks_association_table,
+                                   back_populates="saved_spotify")
 
     # ---- Token Object ----
     access_token = db.Column(db.String(80))
@@ -249,8 +258,12 @@ class TopArtists(db.Model):
 
 
 track_to_top_tracks_table = db.Table("track_to_top_tracks", db.Model.metadata,
-                                       db.Column('track_id', db.String(80), db.ForeignKey('track_object.id')),
-                                       db.Column('top_tracks_id', db.Integer, db.ForeignKey('top_tracks.id')))
+                                     db.Column('track_id', db.String(80), db.ForeignKey('track_object.id')),
+                                     db.Column('top_tracks_id', db.Integer, db.ForeignKey('top_tracks.id')))
+
+tracks_to_listening_session_table = db.Table("track_to_listening_session", db.Model.metadata,
+                                             db.Column('track_id', db.String(80), db.ForeignKey('track_object.id')),
+                                             db.Column('listening_session_id', db.Integer, db.ForeignKey('listening_session.id')))
 
 
 class TrackObject(db.Model):
@@ -289,6 +302,10 @@ class TrackObject(db.Model):
         "TopTracks",
         secondary=track_to_top_tracks_table,
         back_populates='tracks')
+
+    saved_spotify = db.relationship("Spotify",
+                                    secondary=spotify_to_saved_tracks_association_table,
+                                    back_populates="saved_tracks")
 
     def __init__(self, **kwargs):
         self.id = kwargs.get("id", None)
@@ -350,6 +367,20 @@ class TopTracks(db.Model):
         self.tracks.append(track_object)
 
 
+class ListeningSession(db.Model):
+    __tablename__ = "listening_session"
+
+    id = db.Column(db.Integer, primary_key=True)
+    timestamp_begin = db.Column(db.DateTime(timezone=True))
+    timestamp_end = db.Column(db.DateTime(timezone=True))
+
+    # -------- Relationships --------
+    tracks = db.relationship(
+        "TrackObject",
+        secondary=tracks_to_listening_session_table)
+    spotify_id = db.Column(db.Integer, db.ForeignKey('spotify.id'), nullable=True)
+
+
 class AudioFeatures(db.Model):
     __tablename__ = "audio_features"
 
@@ -396,5 +427,3 @@ class AudioFeatures(db.Model):
         self.tempo = kwargs.get("tempo", None)
         self.duration_ms = kwargs.get("duration_ms", None)
         self.time_signature = kwargs.get("time_signature", None)
-
-

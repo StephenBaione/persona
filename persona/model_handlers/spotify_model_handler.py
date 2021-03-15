@@ -2,6 +2,7 @@ from . import db
 from . import User, Spotify, ArtistObject, TopArtists, AlbumObject, TrackObject, AudioFeatures, TopTracks
 from . import persona_model_handler
 from persona.services.spotify import spotify_service
+from tqdm import tqdm
 
 """
 For each database model implement:
@@ -247,17 +248,25 @@ def create_track_object(track: dict):
             print(e)
 
 
-def create_track_object_batch(tracks):
+def create_track_object_batch(tracks, return_tracks=False):
+    if return_tracks:
+        track_objects = []
     for track in tracks:
+        track_object = TrackObject(**track)
         if not check_if_track_exists(track['id']):
             try:
-                track_object = TrackObject(**track)
+                if return_tracks:
+                    track_objects.append(track_object)
                 db.session.add(track_object)
             except Exception as e:
                 print(e)
         else:
+            if return_tracks:
+                track_objects.append(load_track_object(track['id']))
             print("Track already exists")
     db.session.commit()
+    if return_tracks:
+        return track_objects
 
 
 def load_track_object(track_id):
@@ -289,15 +298,46 @@ def delete_track(track_id):
     return False
 
 
+# -------- Saved Tracks --------
+def check_if_saved_track_exists(sp: Spotify, track: TrackObject):
+    if track in sp.saved_tracks:
+        return True
+    return False
+
+
+def add_to_saved_tracks(sp: Spotify, track: TrackObject):
+    if not check_if_saved_track_exists(track):
+        sp.saved_tracks.append(track)
+        db.session.commit()
+
+
+def add_to_saved_tracks_batch(sp: Spotify, tracks: [TrackObject]):
+    for i, track in tqdm(enumerate(tracks)):
+        if not check_if_saved_track_exists(sp, track):
+            sp.saved_tracks.append(track)
+    db.session.commit()
+
+
+def add_to_saved_spotify(track: TrackObject, sp: Spotify):
+    track.saved_spotify.append(sp)
+    db.session.commit()
+
+
+def add_to_saved_spotify_batch(track: TrackObject, sp: [Spotify]):
+    for spotify_user in sp:
+        track.saved_spotify.append(spotify_user)
+    db.session.commit()
+
+
 # -------- Top Tracks --------
 def create_top_tracks(spotify_object, tracks: list):
     top_tracks = TopTracks()
     try:
         for track in tracks:
             if not check_if_track_exists(track['id']):
-                create_artist_object_from_json(track)
-            artist_object = load_artist_by_id(track['id'])
-            top_tracks.add_artist(artist_object)
+                create_track_object(track)
+            track_object = load_track_object(track['id'])
+            top_tracks.add_track(track_object)
         spotify_object.top_tracks.append(top_tracks)
         db.session.add(top_tracks)
         db.session.commit()
@@ -308,7 +348,7 @@ def create_top_tracks(spotify_object, tracks: list):
 
 
 def load_top_tracks(top_track_id):
-    return TopTracks.query.filter_by(id=top_artist_id)
+    return TopTracks.query.filter_by(id=top_track_id)
 
 
 def check_if_top_tracks_exists(top_track_id):
@@ -356,3 +396,13 @@ def create_audio_features_object(audio_features: dict):
             db.session.commit()
         return True
     return False
+
+
+def create_audio_features_object_batch(batch_audio_features: list):
+    for i, audio_features in tqdm(enumerate(batch_audio_features)):
+        track = load_track_object(audio_features['id'])
+        if track is not None:
+            if not check_if_audio_feature_exists(audio_features['id']):
+                audio_features_object = AudioFeatures(track, **audio_features)
+                db.session.add(audio_features_object)
+    db.session.commit()
